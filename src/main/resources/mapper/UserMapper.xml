@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tools.wstools.db.user.mapper.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.tools.wstools.db.user.entity.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.tools.wstools.db.user.entity.User">
+        INSERT INTO user (name, age, email) VALUES (#{name}, #{age}, #{email})
+    </insert>
+
+    <update id="update" parameterType="com.tools.wstools.db.user.entity.User">
+        UPDATE user SET name=#{name}, age=#{age}, email=#{email} WHERE id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="UserResultMap">
+        SELECT * FROM user WHERE id=#{id}
+    </select>
+
+    <select id="selectAll" resultMap="UserResultMap">
+        SELECT * FROM user
+    </select>
+
+</mapper>
